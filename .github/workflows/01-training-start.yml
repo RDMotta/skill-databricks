@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       participant_name:
-        description: "Nome do participante"
-        required: true
+        description: "Nome do participante (opcional). Se não informado, será usado o owner do repositório."
+        required: false
         type: string
       track:
         description: "Trilha de treinamento"
@@ -55,11 +55,11 @@ jobs:
           script: |
             const fs = require('fs');
             const track = '${{ github.event.inputs.track }}';
-            const participant = '${{ github.event.inputs.participant_name }}';
+            const participant = '${{ github.event.inputs.participant_name }}' || context.repo.owner;
 
             // Mapa de trilha → arquivo da etapa inicial e labels iniciais
             const TRACK_CONFIG = {
-              'track-1-full':         { stepFile: 'steps/track1/step-01.md',         stepLabel: 'training-step-01', title: 'SQL Warehouse Serverless' },
+              'track-1-full':         { stepFile: 'steps/track1/step-01.md',         stepLabel: 't1-step-01', title: 'SQL Warehouse Serverless' },
             };
 
             const config = TRACK_CONFIG[track];

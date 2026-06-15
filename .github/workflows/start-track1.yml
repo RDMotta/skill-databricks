@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       participant_name:
-        description: "Seu nome (ex: Joao Silva)"
-        required: true
+        description: "Seu nome (ex: Joao Silva). Opcional — se não informado, será usado o owner do repositório."
+        required: false
         type: string
 
 permissions:
@@ -24,14 +24,14 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const participantName = '${{ github.event.inputs.participant_name }}';
+            const participantName = '${{ github.event.inputs.participant_name }}' || context.repo.owner;
             const track = 'track-1-full';
-            const trackLabel = 'track-4-sql-serverless';
-            const stepLabel = 't4-step-01';
+            const trackLabel = 'track-1-full';
+            const stepLabel = 't1-step-01';
 
             const labelsToCreate = [
               { name: 'databricks-training',    color: 'e4e669', description: 'Treinamento Databricks + Copilot' },
-              { name: trackLabel,               color: 'fb8500', description: 'SQL Warehouse Serverless' },
+              { name: trackLabel,               color: 'd93f0b', description: 'Trilha: SQL Warehouse Serverless' },
               { name: 't1-step-01',             color: 'fb8500', description: 'T1 Etapa 1: Setup + Bronze SQL' },
               { name: 't1-step-02',             color: 'fb8500', description: 'T1 Etapa 2: Silver ETL' },
               { name: 't1-step-03',             color: 'fb8500', description: 'T1 Etapa 3: Gold SQL' },

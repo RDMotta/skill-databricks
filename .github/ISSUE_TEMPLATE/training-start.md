@@ -2,7 +2,7 @@
 name: "🎓 Iniciar Treinamento Databricks + Copilot"
 about: "Use este template para criar sua issue de acompanhamento do treinamento (ou use o workflow 01-training-start)"
 title: "🎓 Treinamento Databricks + Copilot — [SEU NOME]"
-labels: ["databricks-training", "training-step-01"]
+labels: ["databricks-training", "t1-step-01"]
 assignees: ""
 ---
 

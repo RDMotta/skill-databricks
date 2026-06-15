@@ -46,7 +46,7 @@ jobs:
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo:  context.repo.repo,
-              labels: 'databricks-training',
+              labels: 'databricks-training,track-1-full',
               state:  'open',
               per_page: 1,
             });
@@ -78,12 +78,17 @@ jobs:
                 `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}`)
               .replace(/\{\{ACTOR\}\}/g, context.actor);
 
-            // Postar comentário com próxima etapa
-            await github.rest.issues.createComment({
+            // Adicionar o próximo passo dentro do corpo da Issue
+            const updatedBody = [issue.body || '', body]
+              .map(part => part.trim())
+              .filter(Boolean)
+              .join('\n\n---\n\n');
+
+            await github.rest.issues.update({
               owner: context.repo.owner,
               repo:  context.repo.repo,
               issue_number: issue.number,
-              body,
+              body: updatedBody,
             });
 
             // Trocar labels de progresso
