@@ -6,7 +6,7 @@
 
 -- COMMAND ----------
 
-USE training_sql_serverless;
+USE training;
 
 -- COMMAND ----------
 

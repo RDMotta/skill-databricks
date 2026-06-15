@@ -60,7 +60,7 @@ python scripts/generate_sample_data.py && echo "✅ Dados gerados em data/raw/" 
 # ── 4b. Garantir Volume Unity Catalog e fazer upload ───────────────────────────
 # Defaults compatíveis com o Makefile (usam vars já carregadas do .env)
 VC="${VOLUME_CATALOG:-workspace}"
-VS="${VOLUME_SCHEMA:-training_sql_serverless}"
+VS="${VOLUME_SCHEMA:-training}"
 VN="${VOLUME_NAME:-raw_files}"
 VOLUME_RAW_PATH="/Volumes/${VC}/${VS}/${VN}"
 
